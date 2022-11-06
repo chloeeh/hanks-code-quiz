@@ -10,19 +10,17 @@
 
 <body>
   <main class="mx-auto">
-
-    <section id="timer" class="container">
+    <!-- HIGH SCORE AND TIMER -->
+    <section id="timer-score" class="container">
       <div class="row">
         <button id="highscore" class="btn-default col">View Highscores</button>
-        <span class="col">Time Remaining: </span>
+        <span id="time-count" class="col">Time Remaining: </span>
       </div>
         
-
-
     </section>
     <!-- WELCOME SCREEN -->
-    <section class="d-flex container justify-content-center row my-4" id="welcome-screen">
-      <div class="col-12 col-md-6 col-sm-3 align-items-center">
+    <section class="d-flex container justify-content-center row my-4" >
+      <div id="welcome-screen" class="col-12 col-md-6 col-sm-3 align-items-center">
         <h1>Welcome to Code Quiz!</h1>
         <p id="instructions">
           Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by 15 seconds!
@@ -32,22 +30,22 @@
     </section>
 
     <!-- QUIZ VIEW -->
-    <section id="quiz" class="container">
-      <div class="row my-4">
+    <section class="container">
+      <div id="quiz" class="row my-4">
         <h2 id="question">Question 1: ...</h2>
       <!-- <div class="btn-group-vertical column rounded"> -->
         <div class="row col-12 col-md-2">
-          <button type="button" class="btn btn-secondary my-1 rounded">optionA</button>
-          <button type="button" class="btn btn-secondary my-1 rounded">optionB</button>
-          <button type="button" class="btn btn-secondary my-1 rounded">optionC</button>
-          <button type="button" class="btn btn-secondary my-1 rounded">optionD</button>
+          <button type="button" class="btn btn-secondary my-1 rounded" id="A">choiceA</button>
+          <button type="button" class="btn btn-secondary my-1 rounded" id="B">choiceB</button>
+          <button type="button" class="btn btn-secondary my-1 rounded" id="C">choiceC</button>
+          <button type="button" class="btn btn-secondary my-1 rounded" id="D">choiceD</button>
         </div>
       </div>
     </section>
 
     <!-- SUBMIT SCORES -->
-    <section id="allDone" class="container">
-      <div class="row">
+    <section class="container">
+      <div id="allDone" class="row">
         <h4 class="alert-heading">All Done!</h4>
         <h5 class="mb-0">Your final score is <span id="finalScore">XX</span></h5>
         <hr />

@@ -13,13 +13,13 @@ The user can view a list of scores corresponding to users' initials. These value
 
 When the website is opened (or when source code is opened in default browser), the following screens should appear as shown in the images below based on where the user is in the quiz.
 
-![Image of Welcome Screen](./assets/images/passwordGenerator.png)
+![Image of Welcome Screen](./assets/images/welcome-screen.png)
 
-![Image of Quiz Screen](./assets/images/passwordGenerator.png)
+![Image of Quiz Screen](./assets/images/quiz-screen.png)
 
-![Image of Completed Quiz Screen](./assets/images/passwordGenerator.png)
+![Image of Completed Quiz Screen](./assets/images/submit-score.png)
 
-![Image of Scores Screen](./assets/images/passwordGenerator.png)
+![Image of Scores Screen](./assets/images/highscore-screen.png)
 
 
 ## Installation

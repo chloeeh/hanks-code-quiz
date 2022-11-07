@@ -1,3 +1,22 @@
+/* alter spacing for time display and view scores button */
+#time-display {
+    margin-left: 12rem;
+}
+
+/* change attributes of the high score and submit buttons */
+#view-highscore-btn,
+#submit-btn {
+    background-color: lightslategray;
+    color: white;
+    font-style: bold;
+}
+
+/* change attributes of choice buttons */
+.choice-btn {
+    background-color: slateblue;
+    color: antiquewhite;
+    font-style: bold;
+}
 
 /* Make Title on page larger */
 #high-score-page {
@@ -16,19 +35,4 @@
 .saved-score {
     font-size: 1.5rem;
     margin-bottom: 0.2rem;
-}
-
-/* change attributes of the high score and submit buttons */
-#view-highscore-btn,
-#submit-btn {
-    background-color: lightslategray;
-    color: white;
-    font-style: bold;
-}
-
-/* change attributes of choice buttons */
-.choice-btn {
-    background-color: slateblue;
-    color: antiquewhite;
-    font-style: bold;
 }

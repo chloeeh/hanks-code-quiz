@@ -77,9 +77,13 @@ function init() {
     points = 0;                       // set points back to 0
     currentQuestionIndex = 0;         // set index back to 0 to start at first question
     score.textContent = points;
-    var storedHighScores = JSON.parse(localStorage.getItem("arrayInitials"));   // manage local storage on init
+    var storedInitials = JSON.parse(localStorage.getItem("arrayInitials"));   // manage local storage on init
+    if (storedInitials !== null) {
+        arrayInitials = storedInitials;
+    }
+    var storedHighScores = JSON.parse(localStorage.getItem("arrayScores"));   // manage local storage on init
     if (storedHighScores !== null) {
-        arrayInitials = storedHighScores;
+        arrayScores = storedHighScores;
     }
     renderHighScores();
     // set blocks of HTML to show the start screen and button only on init

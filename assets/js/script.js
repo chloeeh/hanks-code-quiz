@@ -5,7 +5,7 @@ var startBtn = document.getElementById("start-btn");
 var quiz = document.querySelector(".quiz");
 var pageQuestion = document.getElementById("question");
 
-var timer = document.getElementById("");
+var timerDisplay = document.getElementById("time-count");
 var score = document.getElementById("final-score");
 
 var choiceBtn = document.querySelectorAll(".choice-btn");
@@ -53,12 +53,13 @@ let quizArray = [
 
 var lastQuestionIndex = quizArray.length-1;
 var currentQuestionIndex = 0;
-var totalSeconds = 60;
-var timeRemaining = 60;
-var penaltySeconds = 15;
 var points = 0;
 var userChoiceId;
 var arrayScores = [];
+
+var timeRemaining = 0;
+var penaltySeconds = 0;
+var timerInterval = setInterval(timer, 1000);
 
 
 console.log(quizArray[1].question);
@@ -71,6 +72,10 @@ console.log(quizArray[3].answer);
 function init() {
     // time span = timeRemaining;
     // time = 0;
+    timeRemaining = 60;
+    penaltySeconds = 15;
+    clearInterval(timerInterval);
+    timerDisplay.textContent = timeRemaining;
     points = 0;
     currentQuestionIndex = 0;
     score.textContent = points;
@@ -86,9 +91,19 @@ function init() {
     highScore.style.display = "none";
 }
 
+function timer() {
+        timeRemaining--;
+        timerDisplay.textContent = timeRemaining;
+
+        if (timeRemaining === 0) {
+            clearInterval(timerInterval);
+            quizComplete();
+        }
+}
+
 function startQuiz(event) {
     event.preventDefault();
-    // time = 75;
+    timerInterval = setInterval(timer, 1000);
     start.style.display = "none";
     startBtn.style.display = "none";
     quiz.style.display = "block";
@@ -123,8 +138,11 @@ function checkAnswer() {
     } else {
         answerIsWrong();
     }
-    currentQuestionIndex++;
+    if (timeRemaining <= 0) {
+        quizComplete();
+    }
 
+    currentQuestionIndex++;
     if (currentQuestionIndex === quizArray.length) {
         quizComplete();
     } else {
@@ -134,19 +152,24 @@ function checkAnswer() {
 
 // maybe just make conditionals...
 function answerIsCorrect() {
-    // document.getElementById(userChoiceId).style.backgroundColor = "green";
+    document.getElementById(userChoiceId).style.backgroundColor = "green";
     console.log("you got it, sister!");
     points++;
 }
 function answerIsWrong() {
-    // document.getElementById(userChoiceId).style.backgroundColor = "red";
+    document.getElementById(userChoiceId).style.backgroundColor = "red";
     console.log("sowwy");
+    timeRemaining -= penaltySeconds;
 }
 
 function quizComplete() {
     quiz.style.display = "none";
     allDone.style.display = "block";
     score.textContent = points;
+
+    clearInterval(timerInterval);
+    timeRemaining = 0;
+    timerDisplay.textContent = timeRemaining;
 }
 
 function renderHighScores() {

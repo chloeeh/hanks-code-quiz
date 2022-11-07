@@ -30,7 +30,7 @@
     </section>
 
     <!-- QUIZ VIEW -->
-    <section class="container">
+    <section class=" d-flex justify-content-center container">
       <div id="quiz" class="row my-4 quiz">
         <h2 id="question">Question 1: ...</h2>
       <!-- <div class="btn-group-vertical column rounded"> -->
@@ -44,10 +44,10 @@
     </section>
 
     <!-- SUBMIT SCORES -->
-    <section class="container">
+    <section class="d-flex justify-content-center container">
       <div id="allDone" class="row">
-        <h4 class="alert-heading">All Done!</h4>
-        <h5 class="mb-0">Your final score is <span id="final-score">XX</span></h5>
+        <h3 class="alert-heading">All Done!</h3>
+        <h4 class="mb-0">Your final score is <span id="final-score">XX</span></h4>
         <hr />
         <form class="col">
           <input
@@ -55,11 +55,19 @@
             type="text"
             id="initials"
             placeholder="Enter your initials"
+            required
           />
-          <button type="submit" class="btn btn-info" id="submit">
+          <button type="submit" class="btn btn-info" id="submit-btn">
             Submit
           </button>
         </form>
+      </div>
+
+      <div id="high-score" class = "row justify-content-center">
+        <h5>High Scores</h5>
+        <ul id="score-list"></ul>
+        <button type="button" id="restart-btn" class="btn btn-primary my-1 rounded col" id="A">Restart</button>
+        <button type="button" id="clear-scores-btn" class="btn btn-primary my-1 rounded col" id="A">Clear High Scores</button>
       </div>
     </section>
   </section>

@@ -14,6 +14,7 @@ var choiceB = document.getElementById("B");
 var choiceC = document.getElementById("C");
 var choiceD = document.getElementById("D");
 var choiceArray = [choiceA, choiceB, choiceC, choiceD];
+var feedbackMessage = document.getElementById("feedback-message");
 
 var allDone = document.getElementById("allDone");
 var submitBtn = document.getElementById("submit-btn");
@@ -63,11 +64,6 @@ var penaltySeconds = 0;
 var timerInterval = setInterval(timer, 1000);
 
 
-console.log(quizArray[1].question);
-console.log(quizArray[2].choices[2]);
-console.log(quizArray[3].answer);
-
-
 // FUNCTIONS ----------------------------
 
 function init() {
@@ -77,6 +73,7 @@ function init() {
     penaltySeconds = 15;
     clearInterval(timerInterval);
     timerDisplay.textContent = timeRemaining;
+    feedbackMessage.innerHTML = "";
     points = 0;
     currentQuestionIndex = 0;
     score.textContent = points;
@@ -130,9 +127,6 @@ function displayQuestion() {
 }
 
 function checkAnswer() {
-    console.log(userChoiceId);
-    // var userAns = answer.textContent;
-    // console.log(userAns);
     var correctAns = quizArray[currentQuestionIndex].answer;
     if (userChoiceId === correctAns) {
         answerIsCorrect();
@@ -151,22 +145,22 @@ function checkAnswer() {
     }
 }
 
-// maybe just make conditionals...
 function answerIsCorrect() {
-    document.getElementById(userChoiceId).style.backgroundColor = "green";
-    console.log("you got it, sister!");
     points++;
-    var correctMessage = document.getElementById("form")
-    var originalContent = form.innerHTML
-    form.innerHTML = "Email was sent"
+
+    feedbackMessage.innerHTML = "CORRECT!"
     setTimeout(function() {
-        form.innerHTML = originalContent
-    }, 5000)
+        feedbackMessage.innerHTML = "";
+    }, 1000)
 }
+
 function answerIsWrong() {
-    document.getElementById(userChoiceId).style.backgroundColor = "red";
-    console.log("sowwy");
     timeRemaining -= penaltySeconds;
+    
+    feedbackMessage.innerHTML = "WRONG!"
+    setTimeout(function() {
+        feedbackMessage.innerHTML = "";
+    }, 1000)
 }
 
 function quizComplete() {
@@ -223,7 +217,6 @@ startBtn.addEventListener("click", startQuiz);
 // choiceBtn.addEventListener("click", checkAnswer);
 choiceBtn.forEach(userChoice => {
     userChoice.addEventListener('click', function handleEvent(event) {
-        console.log(userChoice);
         userChoiceId = userChoice.id;
         checkAnswer();
     })

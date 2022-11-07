@@ -1,14 +1,20 @@
 // Query Selectors --------------------------------
 var start = document.getElementById("welcome-screen");
 var startBtn = document.getElementById("start-btn");
-var quiz = document.getElementById("quiz");
-var question = document.getElementById("question");
+
+var quiz = document.querySelector(".quiz");
+var pageQuestion = document.getElementById("question");
+
 var timer = document.getElementById("");
 var score = document.getElementById("");
+
+var choiceBtn = document.querySelectorAll(".choice-btn");
 var choiceA = document.getElementById("A");
 var choiceB = document.getElementById("B");
 var choiceC = document.getElementById("C");
 var choiceD = document.getElementById("D");
+var choiceArray = [choiceA, choiceB, choiceC, choiceD];
+
 var allDone = document.getElementById("allDone");
 
 
@@ -45,6 +51,7 @@ var totalSeconds = 60;
 var timeRemaining = 60;
 var penaltySeconds = 15;
 var numCorrect = 0;
+var userChoiceId;
 
 
 console.log(quizArray[1].question);
@@ -58,31 +65,54 @@ console.log(quizArray[3].answer);
 
 function init() {
     // time span = timeRemaining;
+    start.style.display = "block";
+    startBtn.style.display = "block";
     quiz.style.display = "none";
     allDone.style.display = "none";
-    question.style.display = "none";
+    // pageQuestion.style.display = "none";
+    quiz.style.display = "none";
 }
 
 function startQuiz(event) {
     event.preventDefault();
     start.style.display = "none";
     startBtn.style.display = "none";
-    renderQuestion();
+    quiz.style.display = "block";
+    // pageQuestion.style.display = "block";
+    displayQuestion();
 
 }
 
-function renderQuestion() {
+function displayQuestion() {
     var myQuestion = quizArray[currentQuestionIndex];
-    quizArray.textContent = myQuestion.question;
-    console.log(quizArray.innerHTML = "<h2>" + myQuestion.question + "</h2>");
-    choiceA.innerHTML = myQuestion.choiceA;
-    choiceB.innerHTML = myQuestion.choiceB;
-    choiceC.innerHTML = myQuestion.choiceC;
-    choiceD.innerHTML = myQuestion.choiceD;
+
+    // populate the question based on the object at the index
+    pageQuestion.textContent = myQuestion.question;
+
+    // Populate buttons with choices based on the object at the index
+    for (var i = 0; i < choiceArray.length; i++) {
+        choiceArray[i].textContent = myQuestion.choices[i];
+    }
+    // currentQuestionIndex++;
+}
+
+function checkAnswer() {
+    console.log(userChoiceId);
+    console.log("user-choices: ", document.querySelector(".user-choices").id);
+    // var userAns = answer.textContent;
+    // console.log(userAns);
+    // var correctAns = quizArray[currentQuestionIndex].answer;
+    console.log("list of choice buttons: ", choiceBtn);
+    // if (userAns === correctAns) {
+    //     console.log("you got it, sister!");
+    // } else {
+    //     console.log("sowwy");
+    // }
 }
 
 // maybe just make conidtionals...
 function answerIsCorrect() {
+    // if(quizArray[currentQuestionIndex].)
     // turn button green
 }
 function answerIsWrong() {
@@ -98,6 +128,17 @@ function answerIsWrong() {
 
 
 // EVENT HANDLERS -----------------------
+init();
 // When user clicks "start" button, begin the startQuiz function
 startBtn.addEventListener("click", startQuiz);
-// init();
+// choiceBtn.addEventListener("click", checkAnswer);
+choiceBtn.forEach(userChoice => {
+    userChoice.addEventListener('click', function handleClick(event) {
+        // console.log('choice-btn clicked', event);
+        // userChoice.setAttribute('style', 'background-color: red;');
+        // console.log(userChoiceId);
+        // console.log(typeof userChoiceId);
+        userChoiceId = userChoice.id;
+        checkAnswer();
+    })
+})

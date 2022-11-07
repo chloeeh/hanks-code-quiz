@@ -6,7 +6,8 @@ var quiz = document.querySelector(".quiz");
 var pageQuestion = document.getElementById("question");
 
 var timer = document.getElementById("");
-var score = document.getElementById("");
+var score = document.getElementById("final-score");
+var points = 0;
 
 var choiceBtn = document.querySelectorAll(".choice-btn");
 var choiceA = document.getElementById("A");
@@ -14,6 +15,7 @@ var choiceB = document.getElementById("B");
 var choiceC = document.getElementById("C");
 var choiceD = document.getElementById("D");
 var choiceArray = [choiceA, choiceB, choiceC, choiceD];
+// var userChoice;
 
 var allDone = document.getElementById("allDone");
 
@@ -26,22 +28,22 @@ let quizArray = [
     {
         question: "Commonly used data types DO NOT include: ",
         choices: ["strings", "booleans", "alerts", "numbers"],
-        answer: "alerts"
+        answer: "C"
     },
     {
         question: "The conditional in an if/else statement is enclosed in: ",
         choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
-        answer: "parentheses"
+        answer: "C"
     },
     {
         question: "Arrays in javascript can be used to store: ",
         choices: ["numbers and strings", "other arrays", "booleans", "all of the above"],
-        answer: "all of the above"
+        answer: "D"
     },
     {
         question: "String values must be enclosed within _____________ when being assigned to a variable.",
-        choices: ["commas", "curly brackets", "quotes", "parentheses"],
-        answer: "quotes"
+        choices: ["quotes", "curly brackets", "commas", "parentheses"],
+        answer: "A"
     },
 ];
 
@@ -84,6 +86,10 @@ function startQuiz(event) {
 }
 
 function displayQuestion() {
+
+    if (currentQuestionIndex > 0) {
+        document.getElementById(userChoiceId).style.backgroundColor = "#6c757d";
+    }
     var myQuestion = quizArray[currentQuestionIndex];
 
     // populate the question based on the object at the index
@@ -98,33 +104,39 @@ function displayQuestion() {
 
 function checkAnswer() {
     console.log(userChoiceId);
-    console.log("user-choices: ", document.querySelector(".user-choices").id);
     // var userAns = answer.textContent;
     // console.log(userAns);
-    // var correctAns = quizArray[currentQuestionIndex].answer;
-    console.log("list of choice buttons: ", choiceBtn);
-    // if (userAns === correctAns) {
-    //     console.log("you got it, sister!");
-    // } else {
-    //     console.log("sowwy");
-    // }
+    var correctAns = quizArray[currentQuestionIndex].answer;
+    if (userChoiceId === correctAns) {
+        answerIsCorrect();
+    } else {
+        answerIsWrong();
+    }
+    currentQuestionIndex++;
+
+    if (currentQuestionIndex === quizArray.length) {
+        quizComplete();
+    } else {
+        displayQuestion();
+    }
 }
 
-// maybe just make conidtionals...
+// maybe just make conditionals...
 function answerIsCorrect() {
-    // if(quizArray[currentQuestionIndex].)
-    // turn button green
+    document.getElementById(userChoiceId).style.backgroundColor = "green";
+    console.log("you got it, sister!");
+    points++;
 }
 function answerIsWrong() {
-    // turn button red
+    document.getElementById(userChoiceId).style.backgroundColor = "red";
+    console.log("sowwy");
 }
 
-// increment current question index by 1: 
-// currentQuestionIndex++;
-
-// start.style.display = "none";
-// renderQuestion();
-// quiz.style.display = "";
+function quizComplete() {
+    quiz.style.display = "none";
+    allDone.style.display = "block";
+    score.textContent = points;
+}
 
 
 // EVENT HANDLERS -----------------------
@@ -133,11 +145,8 @@ init();
 startBtn.addEventListener("click", startQuiz);
 // choiceBtn.addEventListener("click", checkAnswer);
 choiceBtn.forEach(userChoice => {
-    userChoice.addEventListener('click', function handleClick(event) {
-        // console.log('choice-btn clicked', event);
-        // userChoice.setAttribute('style', 'background-color: red;');
-        // console.log(userChoiceId);
-        // console.log(typeof userChoiceId);
+    userChoice.addEventListener('click', function checkUserAnswer(event) {
+        console.log(userChoice);
         userChoiceId = userChoice.id;
         checkAnswer();
     })

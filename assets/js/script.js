@@ -55,6 +55,7 @@ var lastQuestionIndex = quizArray.length-1;
 var currentQuestionIndex = 0;
 var points = 0;
 var userChoiceId;
+var arrayInitials = [];
 var arrayScores = [];
 
 var timeRemaining = 0;
@@ -79,9 +80,9 @@ function init() {
     points = 0;
     currentQuestionIndex = 0;
     score.textContent = points;
-    var storedHighScores = JSON.parse(localStorage.getItem("arrayScores"));
+    var storedHighScores = JSON.parse(localStorage.getItem("arrayInitials"));
     if (storedHighScores !== null) {
-        arrayScores = storedHighScores;
+        arrayInitials = storedHighScores;
     }
     renderHighScores();
     start.style.display = "block";
@@ -155,6 +156,12 @@ function answerIsCorrect() {
     document.getElementById(userChoiceId).style.backgroundColor = "green";
     console.log("you got it, sister!");
     points++;
+    var correctMessage = document.getElementById("form")
+    var originalContent = form.innerHTML
+    form.innerHTML = "Email was sent"
+    setTimeout(function() {
+        form.innerHTML = originalContent
+    }, 5000)
 }
 function answerIsWrong() {
     document.getElementById(userChoiceId).style.backgroundColor = "red";
@@ -179,11 +186,12 @@ function renderHighScores() {
     scoreList.innerHTML = "";
 
      // Render a new li for each todo
-    for (var i = 0; i < arrayScores.length; i++) {
-        var updateScore = arrayScores[i];
+    for (var i = 0; i < arrayInitials.length; i++) {
+        var updateInitials = arrayInitials[i];
+        var updateScores = arrayScores[i];
 
         var li = document.createElement("li");
-        li.textContent = updateScore;
+        li.textContent = updateInitials + " ---- " + updateScores;
         li.setAttribute("data-index", i);
 
         // var button = document.createElement("button");
@@ -196,10 +204,12 @@ function renderHighScores() {
 
 function storeHighScores() {
     // Stringify and set key in localStorage to todos array
+    localStorage.setItem("arrayInitials", JSON.stringify(arrayInitials));
     localStorage.setItem("arrayScores", JSON.stringify(arrayScores));
   }
 
   function clearHighScores() {
+    arrayInitials.splice(0, arrayInitials.length);
     arrayScores.splice(0, arrayScores.length);
     storeHighScores();
     renderHighScores();
@@ -227,7 +237,8 @@ submitBtn.addEventListener("click", function(event) {
         return;
     }
 
-    arrayScores.push(initialsText);
+    arrayScores.push(points);
+    arrayInitials.push(initialsText);
     userInitials.value = "";
 
     storeHighScores();

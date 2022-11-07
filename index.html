@@ -11,6 +11,7 @@
 <body>
 
     <!-- HIGH SCORE AND TIMER -->
+    <!-- displays the "view highscores" button and the dynamic timer at the top of the page -->
     <section id="timer-score" class="container">
       <div class="row">
         <button id="view-highscore-btn" class="btn-default col">View Highscores</button>
@@ -33,13 +34,16 @@
     <section class=" d-flex justify-content-center container">
       <div id="quiz" class="row my-4 quiz">
         <h2 id="question">Question 1: ...</h2>
-      <!-- <div class="btn-group-vertical column rounded"> -->
+      <!-- create the buttons for the user to select an answer for each question-->
+      <!-- NOTE TO FUTURE SELF: do this dynamically in .js for better modularity -->
         <div class="user-choices row col-12 col-md-2">
           <button type="button" class="choice-btn btn-secondary my-1 rounded" id="A">choice0</button>
           <button type="button" class="choice-btn btn-secondary my-1 rounded" id="B">choice1</button>
           <button type="button" class="choice-btn btn-secondary my-1 rounded" id="C">choice2</button>
           <button type="button" class="choice-btn btn-secondary my-1 rounded" id="D">choice3</button>
         </div>
+        <!-- Use the "feedback-message" id to create an element that says when the user
+             selects the correct answer or the wrong answer -->
         <div id="feedback-message"></div>
       </div>
     </section>
@@ -50,6 +54,7 @@
         <h3 class="alert-heading">All Done!</h3>
         <h4 class="mb-0">Your final score is <span id="final-score">XX</span></h4>
         <hr />
+        <!-- Form for user to input text -->
         <form class="col">
           <input
             class="col"
@@ -64,8 +69,11 @@
         </form>
       </div>
 
+      <!-- HIGH SCORE SCREEN -->
       <div id="high-score" class = "row justify-content-center">
         <h5>High Scores</h5>
+        <!-- Setup unordered list to which scores and initials will be appended at
+              the end of the game -->
         <ul id="score-list"></ul>
         <button type="button" id="restart-btn" class="btn btn-primary my-1 rounded col" id="A">Restart</button>
         <button type="button" id="clear-scores-btn" class="btn btn-primary my-1 rounded col" id="A">Clear High Scores</button>
@@ -77,8 +85,7 @@
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
   <!-- Your JavaScript file -->
-  <script type="text/javascript" src="./assets/js/script.js">
-  </script>
+  <script type="text/javascript" src="./assets/js/script.js"></script>
 </body>
 
 </html>

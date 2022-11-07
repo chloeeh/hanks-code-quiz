@@ -13,8 +13,8 @@
     <!-- HIGH SCORE AND TIMER -->
     <!-- displays the "view highscores" button and the dynamic timer at the top of the page -->
     <section id="timer-score" class="container">
-      <div class="row">
-        <button id="view-highscore-btn" class="btn-default col">View Highscores</button>
+      <div class="row my-2">
+        <button id="view-highscore-btn" class=" rounded btn-default col ">View Highscores</button>
         <span class="col">Time Remaining: <span id="time-count">XX</span>
       </div>
         
@@ -63,7 +63,7 @@
             placeholder="Enter your initials"
             required
           />
-          <button type="submit" class="btn btn-info" id="submit-btn">
+          <button type="submit" class="btn rounded" id="submit-btn">
             Submit
           </button>
         </form>
@@ -71,10 +71,10 @@
 
       <!-- HIGH SCORE SCREEN -->
       <div id="high-score" class = "row justify-content-center">
-        <h5>High Scores</h5>
+        <h5 id="high-score-page">High Scores</h5>
         <!-- Setup unordered list to which scores and initials will be appended at
               the end of the game -->
-        <ul id="score-list"></ul>
+        <ul id="score-list" class="saved-score"></ul>
         <button type="button" id="restart-btn" class="btn btn-primary my-1 rounded col" id="A">Restart</button>
         <button type="button" id="clear-scores-btn" class="btn btn-primary my-1 rounded col" id="A">Clear High Scores</button>
       </div>

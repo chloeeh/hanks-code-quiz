@@ -7,6 +7,7 @@ var pageQuestion = document.getElementById("question");
 
 var timerDisplay = document.getElementById("time-count");
 var score = document.getElementById("final-score");
+var viewScoreBtn = document.getElementById("view-highscore-btn");
 
 var choiceBtn = document.querySelectorAll(".choice-btn");
 var choiceA = document.getElementById("A");
@@ -241,3 +242,15 @@ submitBtn.addEventListener("click", function(event) {
 
 restartBtn.addEventListener("click", init);
 clearScoresBtn.addEventListener("click", clearHighScores);
+viewScoreBtn.addEventListener("click", function(event) {
+    renderHighScores();
+    start.style.display = "none";
+    startBtn.style.display = "none";
+    quiz.style.display = "none";
+    allDone.style.display = "none";
+    highScore.style.display = "block";
+
+    clearInterval(timerInterval);
+    timeRemaining = 0;
+    timerDisplay.textContent = timeRemaining;
+})

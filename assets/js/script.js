@@ -7,7 +7,6 @@ var pageQuestion = document.getElementById("question");
 
 var timer = document.getElementById("");
 var score = document.getElementById("final-score");
-var points = 0;
 
 var choiceBtn = document.querySelectorAll(".choice-btn");
 var choiceA = document.getElementById("A");
@@ -15,9 +14,14 @@ var choiceB = document.getElementById("B");
 var choiceC = document.getElementById("C");
 var choiceD = document.getElementById("D");
 var choiceArray = [choiceA, choiceB, choiceC, choiceD];
-// var userChoice;
 
 var allDone = document.getElementById("allDone");
+var submitBtn = document.getElementById("submit-btn");
+var highScore = document.getElementById("high-score");
+var scoreList = document.querySelector("#score-list");
+var userInitials = document.querySelector("#initials");
+var restartBtn = document.querySelector("#restart-btn");
+var clearScoresBtn = document.querySelector("#clear-scores-btn");
 
 
 // Global Variables -------------------------------
@@ -52,8 +56,9 @@ var currentQuestionIndex = 0;
 var totalSeconds = 60;
 var timeRemaining = 60;
 var penaltySeconds = 15;
-var numCorrect = 0;
+var points = 0;
 var userChoiceId;
+var arrayScores = [];
 
 
 console.log(quizArray[1].question);
@@ -61,26 +66,32 @@ console.log(quizArray[2].choices[2]);
 console.log(quizArray[3].answer);
 
 
-
-
 // FUNCTIONS ----------------------------
 
 function init() {
     // time span = timeRemaining;
+    // time = 0;
+    points = 0;
+    currentQuestionIndex = 0;
+    score.textContent = points;
+    var storedHighScores = JSON.parse(localStorage.getItem("arrayScores"));
+    if (storedHighScores !== null) {
+        arrayScores = storedHighScores;
+    }
+    renderHighScores();
     start.style.display = "block";
     startBtn.style.display = "block";
     quiz.style.display = "none";
     allDone.style.display = "none";
-    // pageQuestion.style.display = "none";
-    quiz.style.display = "none";
+    highScore.style.display = "none";
 }
 
 function startQuiz(event) {
     event.preventDefault();
+    // time = 75;
     start.style.display = "none";
     startBtn.style.display = "none";
     quiz.style.display = "block";
-    // pageQuestion.style.display = "block";
     displayQuestion();
 
 }
@@ -123,12 +134,12 @@ function checkAnswer() {
 
 // maybe just make conditionals...
 function answerIsCorrect() {
-    document.getElementById(userChoiceId).style.backgroundColor = "green";
+    // document.getElementById(userChoiceId).style.backgroundColor = "green";
     console.log("you got it, sister!");
     points++;
 }
 function answerIsWrong() {
-    document.getElementById(userChoiceId).style.backgroundColor = "red";
+    // document.getElementById(userChoiceId).style.backgroundColor = "red";
     console.log("sowwy");
 }
 
@@ -138,6 +149,39 @@ function quizComplete() {
     score.textContent = points;
 }
 
+function renderHighScores() {
+    // event.preventDefault();
+    allDone.style.display = "none";
+    highScore.style.display = "block";
+    scoreList.innerHTML = "";
+
+     // Render a new li for each todo
+    for (var i = 0; i < arrayScores.length; i++) {
+        var updateScore = arrayScores[i];
+
+        var li = document.createElement("li");
+        li.textContent = updateScore;
+        li.setAttribute("data-index", i);
+
+        // var button = document.createElement("button");
+        // button.textContent = "Complete ✔️";
+
+        // li.appendChild(button);
+        scoreList.appendChild(li);
+    }
+}
+
+function storeHighScores() {
+    // Stringify and set key in localStorage to todos array
+    localStorage.setItem("arrayScores", JSON.stringify(arrayScores));
+  }
+
+  function clearHighScores() {
+    arrayScores.splice(0, arrayScores.length);
+    storeHighScores();
+    renderHighScores();
+  }
+
 
 // EVENT HANDLERS -----------------------
 init();
@@ -145,9 +189,28 @@ init();
 startBtn.addEventListener("click", startQuiz);
 // choiceBtn.addEventListener("click", checkAnswer);
 choiceBtn.forEach(userChoice => {
-    userChoice.addEventListener('click', function checkUserAnswer(event) {
+    userChoice.addEventListener('click', function handleEvent(event) {
         console.log(userChoice);
         userChoiceId = userChoice.id;
         checkAnswer();
     })
 })
+submitBtn.addEventListener("click", function(event) {
+    event.preventDefault();
+
+    var initialsText = userInitials.value.trim();
+
+    if (initialsText === "") {
+        return;
+    }
+
+    arrayScores.push(initialsText);
+    userInitials.value = "";
+
+    storeHighScores();
+    renderHighScores();
+
+});
+
+restartBtn.addEventListener("click", init);
+clearScoresBtn.addEventListener("click", clearHighScores);

@@ -1,0 +1,34 @@
+
+/* Make Title on page larger */
+#high-score-page {
+    font-size: 3rem;
+}
+
+/* change attributes of score list */
+#score-list {
+    list-style: none;
+    margin-bottom: 2rem;
+    background-color: lightskyblue;
+    color: steelblue;
+}
+
+/* change attributes of score list */
+.saved-score {
+    font-size: 1.5rem;
+    margin-bottom: 0.2rem;
+}
+
+/* change attributes of the high score and submit buttons */
+#view-highscore-btn,
+#submit-btn {
+    background-color: lightslategray;
+    color: white;
+    font-style: bold;
+}
+
+/* change attributes of choice buttons */
+.choice-btn {
+    background-color: slateblue;
+    color: antiquewhite;
+    font-style: bold;
+}

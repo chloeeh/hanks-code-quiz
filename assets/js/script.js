@@ -266,6 +266,7 @@ clearScoresBtn.addEventListener("click", clearHighScores);
 // show the high score page
 // clear the timer
 viewScoreBtn.addEventListener("click", function(event) {
+    event.preventDefault();
     renderHighScores();
 
     start.style.display = "none";
